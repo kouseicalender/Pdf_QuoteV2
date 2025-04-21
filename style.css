@@ -1,0 +1,52 @@
+/* 全体レイアウト */
+body {
+  font-family: sans-serif;
+  padding: 2em;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* 見出し */
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: #2c3e50;
+}
+
+/* ファイルアップロード */
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+input[type="file"] {
+  margin-bottom: 1em;
+  font-size: 1em;
+}
+
+/* テーブル表示 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 1.5em;
+  background-color: #fff;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.6em;
+  text-align: left;
+  vertical-align: top;
+  font-size: 0.95em;
+}
+
+th {
+  background-color: #e9ecef;
+  font-weight: bold;
+  color: #333;
+}
+
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
