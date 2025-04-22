@@ -27,6 +27,7 @@ button {
   padding: 0.5em 1em;
   font-size: 1em;
   cursor: pointer;
+  margin-top: 0.5em;
 }
 
 table {
