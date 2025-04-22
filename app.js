@@ -1,4 +1,3 @@
-// app.js - 編集付きPDF名言整形表示ツール v2
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
 
 let currentData = [];
@@ -6,6 +5,7 @@ let currentData = [];
 document.getElementById('pdf-upload').addEventListener('change', async (e) => {
   const file = e.target.files[0];
   if (!file) return;
+
   const reader = new FileReader();
   reader.onload = async function () {
     const typedArray = new Uint8Array(this.result);
@@ -39,13 +39,22 @@ function parseBlocks(lines) {
       const block = buffer.slice();
       buffer = [];
 
+      // 名言抽出
       const jaLines = block.filter(l => /[ぁ-んァ-ン一-龯]/.test(l));
       const enLines = block.filter(l => /[a-zA-Z]/.test(l) && !/[ぁ-んァ-ン一-龯]/.test(l));
-      const authorLines = block.filter(l => /^[（(][0-9B.C.～年・）\s\-～]+/.test(l));
-
       const ja = jaLines.slice(-2).join(' ') || 'error';
       const en = enLines.slice(-1)[0] || 'error';
-      const author = authorLines[0] || 'error';
+
+      // 出典抽出（人物名と年号のペア）
+      let author = 'error';
+      for (let j = 0; j < block.length - 1; j++) {
+        const thisLine = block[j];
+        const nextLine = block[j + 1];
+        if (/^[（(][0-9B.C.～年・）\s\-～]+/.test(nextLine)) {
+          author = `${thisLine} ${nextLine}`;
+          break;
+        }
+      }
 
       results.push({ ja: ja.trim(), en: en.trim(), author: author.trim() });
     }
@@ -87,7 +96,6 @@ function moveRow(index, direction) {
   renderTable(currentData);
 }
 
-// CSV出力
 function downloadCSV() {
   const headers = ['日付', '日本語', '英語', '出典'];
   let csv = headers.join(',') + '\n';
