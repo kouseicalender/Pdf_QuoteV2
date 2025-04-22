@@ -2,18 +2,19 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>PDF名言整形表示ツール v2</title>
+  <title>PDF名言整形表示ツール v2（編集モード付き）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.min.js"></script>
   <script defer src="app.js"></script>
 </head>
 <body>
-  <h1>PDF名言整形表示ツール v2</h1>
+  <h1>PDF名言整形表示ツール v2（編集モード付き）</h1>
 
   <label for="pdf-upload">PDFファイルを選択:</label>
   <input type="file" id="pdf-upload" accept="application/pdf">
 
   <div id="output"></div>
+  <button id="download-csv" style="margin-top: 1em;">CSVで保存</button>
 </body>
 </html>
